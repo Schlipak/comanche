@@ -88,6 +88,7 @@ module Comanche
     else
       STDERR.puts "Config file not found, creating template at #{CONFIG_FILE_PATH}"
       Comanche.createTemplateConfig
+      Comanche.loadConfig
     end
   end
 end
