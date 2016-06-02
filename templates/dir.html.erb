@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= data[:title] %></title>
+    <style type='text/css'>
+     html, body {
+       width: 100%;
+       height: 100%;
+       min-height: 100%;
+       padding: 0;
+       margin: 0;
+     }
+
+     body {
+       font-family: 'Roboto', Helvetica, Verdana, sans-serif;
+       color: #212121;
+     }
+
+     * {
+       box-sizing: border-box;
+     }
+
+     .container {
+       min-height: 100%;
+       overflow: auto;
+       padding: 1em 2em;
+       padding-bottom: 50px;
+     }
+
+     h2, footer {
+       font-family: 'Roboto Condensed', 'Roboto', Helvetica, Verdana, sans-serif;
+     }
+
+     ul {
+       display: flex;
+       flex-direction: row;
+       justify-content: flex-start;
+       align-items: center;
+       flex-wrap: wrap;
+       position: relative;
+       list-style: none;
+       padding-left: 1em;
+       margin-left: 2em;
+     }
+
+     ul::before {
+       content: '';
+       display: block;
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 1px;
+       height: 100%;
+       background: #cecece;
+       background: -moz-linear-gradient(top,  #ffffff 0%, #cecece 50%, #ffffff 100%);
+       background: -webkit-linear-gradient(top,  #ffffff 0%,#cecece 50%,#ffffff 100%);
+       background: linear-gradient(to bottom,  #ffffff 0%,#cecece 50%,#ffffff 100%);
+       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
+     }
+
+     ul>li {
+       padding: .4em .6em;
+     }
+
+     a {
+       display: inline-flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: flex-end;
+       position: relative;
+       color: #212121;
+       text-decoration: none;
+       width: 96px;
+       height: calc(96px + 1.5em);
+       padding: 0 .5em;
+       padding-bottom: .25em;
+       border-radius: 5px;
+       background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAACW0lEQVR4Xu3dy02bURgG4R9FEUVQQpaR0gcl0AGlUELqQSI9sGDPlgU3Sywii4vRjH1+6wzrvJ/DPBjF9iInS19DC5wMffQefAlg8A9BAAEMLjD44XsGHDvA1fXD8+Dv4bsP//fyz+nFd0f7+vP4GXCEAJuWq0GYFWA1CNMA/D77sdzcPW7/Jhn+TJgG4PzXz+X2/mn5tzKEqQA2P/5rQ5gOYG0IUwKsCWFagLUgTA2wBoTpAUYjBPD2ymDUv44C+O+l2QiEALZeGx8aIYB33uY8JEIAH7zPfCiEAD55o/8QCAF88UnLvhEC2OGjrn0iBLADwD5frAWwI8BHCK+fL6OGaLz5Sx3LZ8KbD2SMr+1fRwEYVcGNAEA8YxqAURHcCADEM6YBGBXBjQBAPGMagFER3AgAxDOmARgVwY0AQDxjGoBREdwIAMQzpgEYFcGNAEA8YxqAURHcCADEM6YBGBXBjQBAPGMagFER3AgAxDOmARgVwY0AQDxjGoBREdwIAMQzpgEYFcGNAEA8YxqAURHcCADEM6YBGBXBjQBAPGMagFER3AgAxDOmARgVwY0AQDxjGoBREdwIAMQzpgEYFcGNAEA8YxqAURHcCADEM6YBGBXBjQBAPGMagFER3AgAxDOmARgVwY0AQDxjGoBREdwIAMQzpgEYFcGNAEA8YxqAURHcCADEM6YBGBXBjQBAPGMagFER3AgAxDOmARgVwY0AQDxjGoBREdwIAMQzpgEYFcGNAEA8YzocwPgmZr6B//+AmeMZ33sARkVwIwAQz5gGYFQENwIA8YzpC7Sg03Az8jqcAAAAAElFTkSuQmCC);
+       background-position: top center;
+       background-repeat: no-repeat;
+       transition: background-color .2s;
+     }
+
+     a.directory {
+       background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAADUUlEQVR4Xu2cvW4TQRSF7xRGEVQBKbTmR0o6fopQRUQCeh4BXiDkTWKegFT0VLQI0ZDG0DlV0qRCSECK4FBMxk4KYyk+d4yOr1mflVLd2TO73zd3dhMpm0xHKIEUOrsmNwkIXgQSIAHBBIKnVwdIQDCB4OnVARIQTCB4enWABAQTCJ5eHSABwQSCp1cHSEAwgeDp1QH/m4D8xtrlb6ivynVvlp/7hOvfTS/sJSF3LiOrOiDv2k65i+0Z3MnCSHALKPC7pBV/mc+FkOASULadzsW2M4PF/9cUjZcABVzs+QezJj8yX6MleARErf5R542VgAXMfu9fqGeCR0AO3H7Gp25cJ9QLuNIyW142u3bVbGlpjtwEXkq/f2L9057l06307NunmiupE3BzxezG9Zr8xRv767ibnh499N64X8Dttla8l+rJ7x/p8WHZJvDhE6CVj0mOjzgunfAEdwIW8LaV7e6d+gvQGWY/v2+gZwIW8H4la9+fcjU5ugAL+NjOetuZUkB5O0obB+V18fIDC9hbm6ffA6YkEXdaWu9NZCwBZDcSQAaM4iUAESLXJYAMGMVLACJErksAGTCKlwBEiFyXADJgFC8BiBC5LgFkwCheAhAhcl0CyIBRvAQgQuS6BJABo3gJQITIdQkgA0bxEoAIkesSQAaM4iUAESLXJYAMGMVLACJErksAGTCKlwBEiFyXADJgFC8BiBC5LgFkwCheAhAhcl0CyIBRvAQgQuS6BJABo3gJQITIdQkgA0bxEoAIkesSQAaM4iUAESLXJYAMGMVLACJErksAGTCKlwBEiFyXADJgFC8BiBC5/u8CPq9+sZTuka+zmfE5f02P9id+3Nbxn/KrHbM0+FKujmoC+XVa35/4oVssoLvWtj8W+dnK6tuemxNadis96B1Ouh4oYHBy3lMX1EvFq3+Q6RIwlKBngd9Bzu/K3v/cc4JbgDrBg3NICe77o0lVAobxw2dC3rZcPl+vt6NzluVtp+wlH6yVOmjPH9dYLcC7DjTOR0ACfJxooySAhtYXLAE+TrRREkBD6wuWAB8n2igJoKH1BUuAjxNtlATQ0PqCJcDHiTZKAmhofcES4ONEGyUBNLS+YAnwcaKNkgAaWl+wBPg40UadAcLZMXBn6xNsAAAAAElFTkSuQmCC);
+       background-position: top center;
+       background-repeat: no-repeat;
+     }
+
+     a.directory:active, a.directory:focus {
+       background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEXklEQVR4Xu2cT1ITQRTGX0OBlFIlVFFW6UKBKsVyI1kA23ADvQGcQLmBnkA4AbB2gxew8ATCLsjCcAPYsTHtawJFMtOdmZ7XPR2Sr6tYkPSf5Pv1e/3myySK0JIqoJKujsUJABJvAgAAgMQKJF4eEQAAiRVIvDwiAAASK5B4eUQAACRWIPHyiAAASKxA4uURAQCQWIHEyyMCHhoAvU+L7KF+4tfd5L/VCK//QG3RdoR5h3JKrwjQB/SN38XnGt7J2EAoDYDF/x1px7t4jgWEUgA47ezepp0aNn/fEiMPoRDAbc7/W7fyPeuNNIQyAFLt/l7mIwuhGED9uX+szoQyAHTC9JNdeuQi4aEBGJa9cMIv5Jg07altakteFABI1OuO3eULx52q0wBAVeX6xx0zhM0qUwFAFdVsY7rpyNslAIBQAMw8mpZ8zwQACAvAOwoAICQAohM+Cxo+UwKAj1ol+jKAQk17pynszC7oMF2IlZAgbRcASKs/AQAAJFYg8fLDHQFzT4lmZ4mePCaanEwsVcTltfGHNPtF6khttA4HrVTPITzziOjFc6KZmYjvelinNiA622r93Bh4uRYfgBH/1cvR3vGF7PUlQ9i0QYgLYHKCaGmJaHqq8CWOfAeTlqavG6rRZhj3LS6AhQWiZ/yH1lVA01c+E77UB2Dl9ZinnuzO05dq/Wy+HgAm9y9z+kHrV0DRplprHd89GC8FmZLTVD5oiQAg/9u3Xm0RYEpPc8GFllHgX6O3HI2XgnAAW7eeWm/1aR4HgKn/V95g7+eKIH2qNs76bumPA8CkHpOC0LIKHHIEbMUvQ3EA27debRdipvw0ZSjawBLUPBknBS0vjqnzWbDjpvi2lUarHT8FvXuLvZ9TQF+xDTGXfTh8BMCCcG2+X3wAN+MDgAXhAKD3OAJyty6GjwBUQK4I4E/FWgfxIwAWhB1AxgO66xQ+AmBBlLIg4gCABeG6ALvgT8K4Ns+3sBEAC8IBQP9gD+hDfAA4gEtbEHFSECwIB4DOR7Xx5yh+BMCCsAOwWBBxIgAWhFcFZDqHO4RhQXhZEOEjABaEC0DuQ5jejuEiABWQ4wpY76i1s10XnXAAYEF4WRDhUxAsCEcFdD2fvSE3fAqCBeFtQYSNAFgQlSqgcGUoDmBvCyJsBMCCcEWA9UMYvzNgn074cu29a4Wbx2FBOOTpvw+0mhdU5icrYUFYtLXfBZHtWHwd0P2pYvfPVsKCqJz/Sx3CptPAH26FBZEHoOmCv5C3Oqj+L30I33VkCPazABVQBoC+4q+kNl3fC/ZOQb0DrJEAC+JeIq1PSXW2yopfOgVlICzy/+YGo+ZNdTTuFkSnc81a/KSJie+2+34GVo/8ZOEhXDQBnpcpAAAy/cSjAUAsoWwCAJDpJx4NAGIJZRMAgEw/8WgAEEsomwAAZPqJRwOAWELZBAAg0088GgDEEsomAACZfuLRACCWUDYBAMj0E48GALGEsgkAQKafePR/QqRacDHkh9cAAAAASUVORK5CYII=);
+       background-position: top center;
+       background-repeat: no-repeat;
+     }
+
+     a:hover, a.directory:hover {
+       background-color: rgba(0,0,140,.06);
+     }
+     
+     footer {
+       display: block;
+       position: relative;
+       left: 0;
+       bottom: 0;
+       width: 100%;
+       height: 50px;
+       line-height: 50px;
+       margin-top: -50px;
+       text-align: center;
+     }
+
+     footer::before {
+       content: '';
+       display: block;
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 1px;
+       background: #ffffff;
+       background: -moz-linear-gradient(left,  #ffffff 0%, #cecece 50%, #ffffff 100%);
+       background: -webkit-linear-gradient(left,  #ffffff 0%,#cecece 50%,#ffffff 100%);
+       background: linear-gradient(to right,  #ffffff 0%,#cecece 50%,#ffffff 100%);
+       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
+     }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Directory <%= data[:title] %></h2>
+      <ul>
+        <% data[:entries].each do |e| %>
+          <li>
+            <% uri = data[:title] + '/' + e %>
+            <% if data[:title] == '/' then %>
+              <% uri = e %>
+            <% end %>
+            <% classes = '' %>
+            <% if File.directory?(data[:path] + '/' + e) then %>
+              <% classes += ' directory' %>
+            <% end %>
+            <a href='<%= uri %>' class='<%= classes %>'>
+              <span><%= e %></span>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <footer>
+      Comanche v<%= data[:comanche]::VERSION_NUMBER + ' ' + data[:comanche]::VERSION_NAME %>
+    </footer>
+  </body>
+</html>
