@@ -2,12 +2,10 @@
 
 require 'socket'
 
-require_relative 'requesthandler'
-require_relative 'replycontent'
-require_relative 'string'
+Dir[File.dirname(__FILE__) + '/comanche/*.rb'].each {|f| require f}
 
 module Comanche
-  VERSION_NUMBER = '0.1.2'
+  VERSION_NUMBER = '0.1.3'
   VERSION_NAME = 'Arctic Fox'
 
   class Server

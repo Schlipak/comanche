@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# -*- encoding: utf-8 -*-
+
+require 'server'
+
+module Comanche
+  CONFIG_DIR = Dir.pwd + '/config'
+  CONFIG_FILE_PATH = CONFIG_DIR + '/comanche.conf.yml'
+  ROUTING_FILE_PATH = CONFIG_DIR + '/routing.yml'
+
+  def self.startUp
+    parser = Comanche::ParamParser.new
+    opts = parser.parse!
+    Comanche.loadConfig
+    if ARGV.length != 1 then
+      port = Comanche.config[:server][:port] || 3333
+    else
+      port = ARGV[0].to_i
+      if port <= 0 or port > 49151 then
+        STDERR.puts "Port number out of range [1-49151]".colorize(:color => :red)
+        exit! 1
+      end
+    end
+    server = Comanche::Server.new port, opts
+    server.run!
+  end
+end
+
+Comanche.startUp
+exit 0

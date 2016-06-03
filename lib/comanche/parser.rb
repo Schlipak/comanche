@@ -2,6 +2,8 @@
 
 require 'optparse'
 
+require_relative '../server'
+
 module Comanche
   class ParamParser
     PARAMS = "[flags] [port]".freeze

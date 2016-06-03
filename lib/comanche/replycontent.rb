@@ -3,7 +3,7 @@
 require 'erb'
 
 require_relative 'config'
-require_relative 'server'
+require_relative '../server'
 
 module Comanche
   class ReplyContent
@@ -105,10 +105,14 @@ module Comanche
 
     def generateDirectoryPage(path)
       if Dir.entries(path).nil? then
-        return '<h2>Cannot open directory</h2>'
+        return 'Cannot open directory'
       end
       RequestHandler.logLine("Generating #{path}", :purple)
-      template = File.read 'templates/dir.html.erb'
+      templatePath = File.join(File.dirname(__FILE__), '../../templates/dir.html.erb')
+      if not File.exist? templatePath then
+        return "Directory template not found"
+      end
+      template = File.read templatePath
       data = {
         :path => path,
         :entries => Dir.entries(path).sort,
