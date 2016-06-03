@@ -5,7 +5,7 @@ A pocket-sized Ruby HTTP server.
 
 Comanche was made just for fun, and is **NOT** production-ready. You've been warned!
 
-This version is in development and is not ready yet to be deployed as a Gem. Please check out the [statis](https://github.com/Schlipak/comanche/tree/static) branch for a simple static version of Comanche. (Although it will not be supported in the future)
+This version is in development and is not ready yet to be deployed as a Gem. Please check out the [static](https://github.com/Schlipak/comanche/tree/static) branch for a simple static version of Comanche. (Although it will not be supported in the future)
 
 ### Usage
 
