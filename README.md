@@ -5,7 +5,7 @@ A pocket-sized Ruby HTTP server.
 
 Comanche was made just for fun, and is **NOT** production-ready. You've been warned!
 
-Comanche as of today isn't built as a Gem, which means the installation process isn't automatic. This will become available in future versions.
+This version of Comanche isn't built to work as a Gem, and won't generally be maintained, as its purpose was to be as simple as possible. Check out the [dynamic](https://github.com/Schlipak/comanche/tree/dynamic) branch for a Gem-compatible and updated version.
 
 ### Usage
 
