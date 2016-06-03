@@ -65,11 +65,17 @@ module Comanche
   end
 
   def self.createTemplateConfig
-    FileUtils.mkdir_p CONFIG_DIR
-    File.open(CONFIG_FILE_PATH, 'w') do |fd|
-      fd.puts "##\n## Comanche config file\n##\n\n"
-      fd.puts DEFAULT_CONF.to_yaml
-      fd.close
+    begin
+      FileUtils.mkdir_p CONFIG_DIR
+      File.open(CONFIG_FILE_PATH, 'w') do |fd|
+        fd.puts "##\n## Comanche config file\n##\n\n"
+        fd.puts DEFAULT_CONF.to_yaml
+        fd.close
+      end
+      STDERR.puts "Created template configuration file in #{CONFIG_FILE_PATH}".colorize(:color => :green)
+    rescue SystemCallError => e
+      STDERR.puts "Error creating template configuration file".colorize(:color => :red)
+      STDERR.puts e.to_s.capitalize
     end
   end
 
@@ -86,9 +92,9 @@ module Comanche
         STDERR.puts e.to_s.capitalize
       end
     else
-      STDERR.puts "Config file not found, creating template at #{CONFIG_FILE_PATH}"
-      Comanche.createTemplateConfig
-      Comanche.loadConfig
+      STDERR.puts "No configuration file found in #{File.dirname(CONFIG_FILE_PATH)}".colorize(:color => :red)
+      STDERR.puts "Run #{"'comanche --template'".colorize(:mode => :italic)} to create a template config file"
+      exit! 1
     end
   end
 end

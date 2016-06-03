@@ -7,7 +7,7 @@ require_relative '../server'
 module Comanche
   class ParamParser
     PARAMS = "[flags] [port]".freeze
-    DESCR = "\thost\t\tHost to bind the server to\n\tport\t\tPort to listen to\n\n".freeze
+    DESCR = "\thost\t\t\tHost to bind the server to\n\tport\t\t\tPort to listen to\n\n".freeze
     USAGE = "USAGE\n\tcomanche #{PARAMS}\n\nDESCRIPTION\n#{DESCR}OPTIONS\n"
 
     VERSION = '1.0'.freeze
@@ -36,7 +36,7 @@ module Comanche
 
     def parse!
       begin
-        @parser = OptionParser.new(USAGE, 15, "\t") do |opts|
+        @parser = OptionParser.new(USAGE, 23, "\t") do |opts|
           opts.on('-h', '--help', 'Show the help') do |v|
             STDERR.puts @parser.help
             exit! 0
@@ -59,6 +59,11 @@ module Comanche
           opts.on('-r', '--restart', 'Restart the server') do
             ParamParser.killDaemon
             puts
+          end
+
+          opts.on('-t', '--template', 'Create a template configuration file') do
+            Comanche.createTemplateConfig
+            exit! 0
           end
         end
         @parser.parse!
