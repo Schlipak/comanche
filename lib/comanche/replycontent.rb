@@ -3,7 +3,7 @@
 require 'erb'
 
 require_relative 'config'
-require_relative '../server'
+require_relative '../comanche'
 
 module Comanche
   class ReplyContent

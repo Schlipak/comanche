@@ -4,7 +4,7 @@ require 'addressable/uri'
 require 'socket'
 require 'timeout'
 
-require_relative '../server'
+require_relative '../comanche'
 
 module Comanche
   class RequestHandler

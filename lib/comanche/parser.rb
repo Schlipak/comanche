@@ -2,7 +2,7 @@
 
 require 'optparse'
 
-require_relative '../server'
+require_relative '../comanche'
 
 module Comanche
   class ParamParser

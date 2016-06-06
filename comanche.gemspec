@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 require 'date'
-require File.expand_path('../lib/server.rb', __FILE__)
+require File.expand_path('../lib/comanche.rb', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name             = 'comanche'
@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.license          = 'MIT'
 
   spec.files            = Dir['templates/*'] + %w[
-    lib/server.rb
+    lib/comanche.rb
     lib/comanche/config.rb
     lib/comanche/parser.rb
     lib/comanche/replycontent.rb

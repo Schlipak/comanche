@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # -*- encoding: utf-8 -*-
 
-require 'server'
+require 'comanche'
 
 module Comanche
   CONFIG_DIR = Dir.pwd + '/config'
