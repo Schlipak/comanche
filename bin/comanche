@@ -13,7 +13,7 @@ module Comanche
     opts = parser.parse!
     Comanche.loadConfig
     if ARGV.length != 1 then
-      port = Comanche.config[:server][:port] || 3333
+      port = Comanche.config.dig(:server, :port) || 3333
     else
       port = ARGV[0].to_i
       if port <= 0 or port > 49151 then

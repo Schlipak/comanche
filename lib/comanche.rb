@@ -22,7 +22,7 @@ module Comanche
         exit! 1
       end
       @threads = Array.new
-      @root = Comanche.config[:website][:root] || WEB_ROOT
+      @root = Comanche.config.dig(:website, :root) || WEB_ROOT
       @@root = @root
 
       @daemonize = opts[:daemon]

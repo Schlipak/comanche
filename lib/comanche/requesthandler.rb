@@ -118,9 +118,9 @@ module Comanche
         # TODO: Reconsider the use of timeout here
         # We can't know before receiving the request if a timeout should be enforced
         # eg. Keep-alive type connections should be exempted
-        # note: Somehow, keep-alive connections like mp3 transfers seem to sometimes
+        # note: Somehow, keep-alive connections like mp3 transfers seem to
         # work even though Comanche will log a timeout error?
-        Timeout::timeout(Comanche.config[:server][:timeout]) do
+        Timeout::timeout(Comanche.config.dig(:server, :timeout)) do
           @request = @socket.gets
 
           @port, @ip = Socket.unpack_sockaddr_in(@socket.getpeername)

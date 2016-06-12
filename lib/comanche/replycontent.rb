@@ -35,7 +35,7 @@ module Comanche
                   :path
 
     def initialize(path)
-      @notfound = File.join(Server.root, Comanche.config[:website][:not_found])
+      @notfound = File.join(Server.root, Comanche.config.dig(:website, :not_found).to_s)
       @path = (path or @notfound)
       @conn = nil
 
@@ -62,7 +62,7 @@ module Comanche
         ppath = @path
         @path = File.join(@path, 'index.html')
         return true if self.findData
-        if not Comanche.config[:mods][:mod_dir] then
+        if not Comanche.config.dig(:mods, :mod_dir) then
           @path = 'FORBIDDEN'
           @data = 'Directory listing has been disabled'
           @type = CONTENT_TYPES['txt']
