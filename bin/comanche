@@ -4,9 +4,9 @@
 require 'comanche'
 
 module Comanche
-  CONFIG_DIR = Dir.pwd + '/config'
-  CONFIG_FILE_PATH = CONFIG_DIR + '/comanche.conf.yml'
-  ROUTING_FILE_PATH = CONFIG_DIR + '/routing.yml'
+  CONFIG_DIR = File.join Dir.pwd, 'config'
+  CONFIG_FILE_PATH = File.join CONFIG_DIR, 'comanche.conf.yml'
+  ROUTING_FILE_PATH = File.join CONFIG_DIR, 'routing.yml'
 
   def self.startUp
     parser = Comanche::ParamParser.new
